@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <form action="/" method="POST" enctype="application/x-www-form-urlencoded">
+        Enter your message here <input type="text" name="message" id=""><br>
+        Destination number <input type="number" name="num" id="destination_number"><br>
+        Selected Date <input type="datetime-local" name="getDate" id="getdate"><br>
+        <!-- Selected Time <input type="time" name="getTime" id="gettime"><br> -->
+        <input type="submit" name="" id="subBtn">
+       
+    </body>
+    </form>
+    <!-- <script>
+       let btn= document.querySelector("#subBtn");
+      
+      let printTime=()=>{
+        let selectedDate=document.querySelector("#getdate").value;
+        let selectedTime=document.querySelector("#gettime").value;
+        console.log(selectedDate+selectedTime)  
+      }
+      
+      btn.addEventListener("click",(e)=>{
+        e.preventDefault();
+        printTime();
+
+      
+      }) 
+    </script> -->
+
+</html>

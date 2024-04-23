@@ -1,16 +1,16 @@
 {
-  "name": "sms",
+  "name": "twilio",
   "version": "1.0.0",
   "description": "",
-  "main": "sms.js",
+  "main": "sendsms.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "bipas",
+  "author": "Bipash",
   "license": "ISC",
   "dependencies": {
-    "cron": "^3.1.7",
     "dotenv": "^16.4.5",
+    "express": "^4.19.2",
     "node-cron": "^3.0.3",
     "node-schedule": "^2.1.1",
     "twilio": "^5.0.4"
