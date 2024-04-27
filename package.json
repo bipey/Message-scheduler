@@ -2,17 +2,23 @@
   "name": "twilio",
   "version": "1.0.0",
   "description": "",
-  "main": "sendsms.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "stop": "powershell -ExecutionPolicy Bypass -Command \"pm2 stop all\""
+
+
   },
   "author": "Bipash",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
     "express": "^4.19.2",
     "node-cron": "^3.0.3",
     "node-schedule": "^2.1.1",
+    "pm2": "^5.3.1",
     "twilio": "^5.0.4"
   }
 }
