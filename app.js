@@ -1,16 +1,17 @@
-// Importing the required module
+// Importing the required modules
 require("dotenv").config();
 const cron = require('node-cron');
 const express = require('express');
 const path = require('path');
+const moment = require('moment-timezone'); // Import moment-timezone
 const app = express();
 
-// Getting the required credential
+// Getting the required credentials
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
 
-//Api code to use the twilio
+// Function to send SMS
 const sendsms = async (msg_data, number) => {
   try {
     const msg = await client.messages.create({
@@ -20,7 +21,6 @@ const sendsms = async (msg_data, number) => {
     });
     console.log("Message sent to user");
   } catch (error) {
-
     console.log(error);
   }
 }
@@ -35,23 +35,17 @@ app.post('/', (req, res) => {
   selectedMsg = req.body["message"];
   selectedDate = new Date(req.body["getDate"]);
   selectedNumber = req.body["num"];
-  
-  if(selectedNumber.length == 10){
-    res.send(`The sent message: ${selectedMsg}<br>Date: ${selectedDate} <br>Sent to: ${selectedNumber}`);
-    scheduledJob(); // Only schedule the job if the number is valid
-  }
-  else {
-    res.send("Invalid number");
-  }
+  res.send(`The sent message: ${selectedMsg}<br>Date: ${moment(selectedDate).tz('Asia/Kolkata').format('YYYY-MM-DD HH:mm:ss')} <br>Sent to: ${selectedNumber}`);
+  scheduledJob(); // Only schedule the job if the number is valid
 });
 
-
-//task scheduling
+// Schedule the job
 function scheduledJob() {
   const cronExpression = `${selectedDate.getMinutes()} ${selectedDate.getHours()} ${selectedDate.getDate()} ${selectedDate.getMonth() + 1} *`; 
   cron.schedule(cronExpression, () => {
-      sendsms(selectedMsg, selectedNumber);
- });
+    sendsms(selectedMsg, selectedNumber);
+  });
 }
 
+// Start the server
 app.listen(process.env.PORT || 8000);
