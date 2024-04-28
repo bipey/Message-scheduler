@@ -35,7 +35,7 @@ app.post('/', (req, res) => {
   selectedMsg = req.body["message"];
   selectedDate = new Date(req.body["getDate"]);
   selectedNumber = req.body["num"];
-  const serverTimeZone = moment.tz.guess(); // Get server's local time zone
+  const serverTimeZone = 'Asia/Katmandu' // Get server's local time zone
   res.send(`The sent message: ${selectedMsg}<br>Date: ${moment(selectedDate).tz(serverTimeZone).format('YYYY-MM-DD HH:mm:ss')} <br>Sent to: ${selectedNumber} <br>${serverTimeZone}`);
   scheduledJob();
 });
