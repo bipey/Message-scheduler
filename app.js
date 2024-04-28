@@ -3,7 +3,7 @@ require("dotenv").config();
 const cron = require('node-cron');
 const express = require('express');
 const path = require('path');
-const moment = require('moment-timezone'); // Import moment-timezone
+const moment = require('moment-timezone');
 const app = express();
 
 // Getting the required credentials
@@ -36,8 +36,8 @@ app.post('/', (req, res) => {
   selectedDate = new Date(req.body["getDate"]);
   selectedNumber = req.body["num"];
   const serverTimeZone = moment.tz.guess(); // Get server's local time zone
-  res.send(`The sent message: ${selectedMsg}<br>Date: ${moment(selectedDate).tz(serverTimeZone).format('YYYY-MM-DD HH:mm:ss')} <br>Sent to: ${selectedNumber}`);
-  scheduledJob(); // Only schedule the job if the number is valid
+  res.send(`The sent message: ${selectedMsg}<br>Date: ${moment(selectedDate).tz(serverTimeZone).format('YYYY-MM-DD HH:mm:ss')} <br>Sent to: ${selectedNumber} <br>${serverTimeZone}`);
+  scheduledJob();
 });
 
 // Schedule the job
