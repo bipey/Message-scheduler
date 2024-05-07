@@ -26,19 +26,20 @@ const sendsms = async (msg_data, number) => {
 }
 
 // Transfering the data from the form to the backend
-let selectedMsg, selectedDate, selectedNumber,getDate;
+let selectedMsg, selectedDate, selectedNumber,currentTime;
 app.use(express.urlencoded({extended:true}));
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'front.html'));
 });
 app.post('/', (req, res) => {
   selectedMsg = req.body["message"];
-  getDate=req.body["getDate"];
+  const serverTimeZone = moment.tz.guess();
+  currentTime=new Date(req.body["getDate"]);
   selectedDate = moment(req.body["getDate"]).subtract(5, 'hours').subtract(45, 'minutes'); // Subtract 5 hours and 45 minutes
   selectedNumber = req.body["num"];
 
   // sendsms(selectedMsg, selectedNumber);
-   res.send(`The sent message: ${selectedMsg}<br>Date: ${getDate.format('YYYY-MM-DD HH:mm:ss')} <br>Sent to: ${selectedNumber}`);
+   res.send(`The sent message: ${selectedMsg}<br>Date: ${moment(currentTime).tz(serverTimeZone).format('YYYY-MM-DD HH:mm:ss')} <br>Sent to: ${selectedNumber}`);
   scheduledJob();
 });
 
