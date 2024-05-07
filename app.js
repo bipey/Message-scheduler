@@ -33,17 +33,18 @@ app.get('/', function (req, res) {
 });
 app.post('/', (req, res) => {
   selectedMsg = req.body["message"];
-  selectedDate = new Date(req.body["getDate"]);
+  selectedDate = moment(req.body["getDate"]).subtract(5, 'hours').subtract(45, 'minutes'); // Subtract 5 hours and 45 minutes
   selectedNumber = req.body["num"];
   const serverTimeZone = moment.tz.guess(); // Get server's local time zone
-  sendsms(selectedMsg, selectedNumber);
-  // res.send(`The sent message: ${selectedMsg}<br>Date: ${moment(selectedDate).tz(serverTimeZone).format('YYYY-MM-DD HH:mm:ss')} <br>Sent to: ${selectedNumber}`);
-  // scheduledJob();
+  console.log(serverTimeZone);
+  // sendsms(selectedMsg, selectedNumber);
+   res.send(`The sent message: ${selectedMsg}<br>Date: ${selectedDate.format('YYYY-MM-DD HH:mm:ss')} <br>Sent to: ${selectedNumber}`);
+  scheduledJob();
 });
 
 // Schedule the job
 function scheduledJob() {
-  const cronExpression = `${selectedDate.getMinutes()} ${selectedDate.getHours()} ${selectedDate.getDate()} ${selectedDate.getMonth() + 1} *`; 
+  const cronExpression = `${selectedDate.minutes()} ${selectedDate.hours()} ${selectedDate.date()} ${selectedDate.month() + 1} *`; 
   cron.schedule(cronExpression, () => {
     sendsms(selectedMsg, selectedNumber);
   });
