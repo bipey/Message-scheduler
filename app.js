@@ -37,7 +37,6 @@ app.post('/', (req, res) => {
   selectedDate = moment(req.body["getDate"]).subtract(5, 'hours').subtract(45, 'minutes'); // Subtract 5 hours and 45 minutes
   selectedNumber = req.body["num"];
 
-  console.log(serverTimeZone);
   // sendsms(selectedMsg, selectedNumber);
    res.send(`The sent message: ${selectedMsg}<br>Date: ${getDate.format('YYYY-MM-DD HH:mm:ss')} <br>Sent to: ${selectedNumber}`);
   scheduledJob();
