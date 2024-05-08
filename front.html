@@ -3,15 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="front.css">
     <title>Document</title>
 </head>
 <body>
   <form action="/" method="POST" enctype="application/x-www-form-urlencoded" onsubmit="return validateForm()">
-        Enter your message here <input type="text" name="message" id=""><br>
-        Destination number <input type="number" name="num" id="destination_number" required pattern="(97|98)\d{8}"><br>
-        Selected Date <input type="datetime-local" name="getDate" id="getdate"><br>
+    
+        <div class="formInp">
+          <h1>Message Scheduler</h1>
+          <input type="text" name="message" id="" class="inp" placeholder="Enter your message here"><br>
+        <input type="number" name="num" id="destination_number" class="inp" required pattern="(97|98)\d{8}" placeholder="Enter The number here"><br>
+        Select Date <input type="datetime-local" name="getDate" id="getdate" class="inp"><br>
+        
         
         <input type="submit" name="" id="subBtn">
+      </div>
        
     </body>
     </form>
