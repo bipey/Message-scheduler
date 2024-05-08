@@ -5,7 +5,7 @@ const express = require('express');
 const path = require('path');
 const moment = require('moment-timezone');
 const app = express();
-
+app.use(express.static(path.join(__dirname, 'public')));
 // Getting the required credentials
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
